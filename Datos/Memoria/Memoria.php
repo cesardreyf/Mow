@@ -9,7 +9,7 @@ class Memoria implements IMemoria extends MemoriaSoloLectura
 
     public function definir(string $direccion, string $valor)
     {
-        return $this->buffer[$direccion] = $valor;
+        return $this->memoria_v[$direccion] = $valor;
     }
 
 }

@@ -5,6 +5,7 @@ namespace Mow\Gestor\Autoload;
 define('_MOW_NAMESPACE', 'Mow');
 define('_MOW_CARPETA', dirname(dirname(__DIR__)));
 
+// Singleton (?)
 class Autoload
 {
 
