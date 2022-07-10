@@ -1,0 +1,7 @@
+TAREAS:
+
+    . Gestor Invocador
+
+        Al invocar un objeto sin nombre de espacio crea un backslash y por
+        ende termina habiendo dos barras antes del nombre de la clase (a
+        la hora de buscar el archivo [nombre del archivo]).
