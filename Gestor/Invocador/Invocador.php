@@ -31,7 +31,8 @@ class Invocador
             if( isset($namespace_reservados[$clase_namespace]) ) {
                 $archivo_ruta = $namespace_reservados[$clase_namespace]->ruta() . $archivo_nombre . '.php';
             } else {
-                $archivo_ruta = $carpeta_principal->ruta() . $clase_namespace . DIRECTORY_SEPARATOR . $archivo_nombre . '.php';
+                $clase_namespace = empty($clase_namespace) ? '' : $clase_namespace . DIRECTORY_SEPARATOR;
+                $archivo_ruta = $carpeta_principal->ruta() . $clase_namespace . $archivo_nombre . '.php';
             }
 
             // TAREA: Validar si el archivo existe (?)
