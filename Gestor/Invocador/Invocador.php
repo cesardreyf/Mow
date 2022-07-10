@@ -6,24 +6,15 @@ use Mow\Interfaz\Archivos\Carpeta;
 
 class Invocador
 {
-    // Carpeta donde va a buscar si no se especifica ningun namespace
-    private $carpeta_principal;
-
     // Lista de namespace's
     private $namespace_reservados;
 
     public function __construct(Carpeta $carpeta_principal)
     {
-        $this->carpeta_principal = $carpeta_principal;
         $this->namespace_reservados = array();
-    }
+        $namespace_reservados =& $this->namespace_reservados;
 
-    public function registrarAutoload()
-    {
-        $carpeta_principal = $this->carpeta_principal;
-        $namespace_reservados = $this->namespace_reservados;
-
-        spl_autoload_register(function($clase_nombre) use ($carpeta_principal, $namespace_reservados) {
+        spl_autoload_register(function($clase_nombre) use ($carpeta_principal, &$namespace_reservados) {
             $clase_namespace_strpos = strpos($clase_nombre, '\\');
             $clase_namespace = substr($clase_nombre, 0, $clase_namespace_strpos);
             $archivo_nombre = trim(str_replace('\\', DIRECTORY_SEPARATOR, substr($clase_nombre, $clase_namespace_strpos)), DIRECTORY_SEPARATOR);
