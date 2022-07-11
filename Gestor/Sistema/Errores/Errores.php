@@ -2,6 +2,9 @@
 
 namespace Mow\Gestor\Sistema\Errores;
 
+use Mow\Datos\Sistema\Errores\Guardar\GuardarNada;
+use Mow\Datos\Sistema\Errores\Imprimir\ImprimirNada;
+use Mow\Interfaz\Memoria\MemoriaSoloLectura as MSL;
 use Mow\Interfaz\Sistema\Errores\Guardable;
 use Mow\Interfaz\Sistema\Errores\Imprimible;
 
@@ -10,10 +13,20 @@ class Errores
     private $g_guardado;
     private $g_impresion;
 
-    public function __construct(Guardable $g_guardado, Imprimible $g_impresion)
+    public function __construct(MSL $config, ?Guardable $g_guardado = null, ?Imprimible $g_impresion = null)
     {
-        $this->cambiarGestorDeGuardado($g_guardado);
-        $this->cambiarGestorDeImpresion($g_impresion);
+        if( $config->obtener('guardar') == true && $g_guardado !== null ) {
+            $this->cambiarGestorDeGuardado($g_guardado);
+        } else {
+            $this->cambiarGestorDeGuardado(new GuardarNada());
+        }
+
+        if( $config->obtener('imprimir') == true && $g_impresion !== null ) {
+            $this->cambiarGestorDeImpresion($g_impresion);
+        } else {
+            $this->cambiarGestorDeImpresion(new ImprimirNada());
+        }
+
         register_shutdown_function([$this, 'ultimoError']);
     }
 

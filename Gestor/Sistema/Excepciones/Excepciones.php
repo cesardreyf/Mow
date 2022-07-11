@@ -2,6 +2,9 @@
 
 namespace Mow\Gestor\Sistema\Excepciones;
 
+use Mow\Datos\Sistema\Excepciones\Guardar\GuardarNada;
+use Mow\Datos\Sistema\Excepciones\Guardar\ImprimirNada;
+use Mow\Interfaz\Memoria\MemoriaSoloLectura as MSL;
 use Mow\Interfaz\Sistema\Excepciones\Guardable;
 use Mow\Interfaz\Sistema\Excepciones\Imprimible;
 use Throwable;
@@ -11,10 +14,19 @@ class Excepciones
     private $g_guardado;
     private $g_impresion;
 
-    public function __construct(Guardable $g_guardado, Imprimible $g_impresion)
+    public function __construct(MSL $config, ?Guardable $g_guardado = null, ?Imprimible $g_impresion = null)
     {
-        $this->cambiarGestorDeGuardado($g_guardado);
-        $this->cambiarGestorDeImpresion($g_impresion);
+        if( $config->obtener('guardar') == true && $g_guardado !== null ) {
+            $this->cambiarGestorDeGuardado($g_guardado);
+        } else {
+            $this->cambiarGestorDeGuardado(new GuardarNada());
+        }
+
+        if( $config->obtener('imprimir') == true && $g_impresion !== null ) {
+            $this->cambiarGestorDeImpresion($g_impresion);
+        } else {
+            $this->cambiarGestorDeImpresion(new ImprimirNada());
+        }
 
         set_exception_handler([$this, 'guardarExcepcion']);
     }
