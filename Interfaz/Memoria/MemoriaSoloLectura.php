@@ -4,7 +4,7 @@ namespace Mow\Interfaz\Memoria;
 
 interface MemoriaSoloLectura
 {
-    public function obtener(string $direccion): string;
+    public function obtener(string $direccion);
 }
 
 ?>

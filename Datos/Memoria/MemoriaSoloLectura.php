@@ -16,7 +16,7 @@ class MemoriaSoloLectura implements MSL
         $this->memoria_i = $id;
     }
 
-    public function obtener(string $direccion): string
+    public function obtener(string $direccion)
     {
         if( isset($this->memoria_v[$direccion]) ) {
             return $this->memoria_v[$direccion];
