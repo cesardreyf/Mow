@@ -9,21 +9,28 @@ class Invocador
     // Lista de namespace's
     private $namespace_reservados;
 
-    public function __construct(Carpeta $carpeta_principal)
+    private $namespace_general;
+
+    public function __construct()
     {
+        $this->namespace_general = null;
         $this->namespace_reservados = array();
+
+        $namespace_general =& $this->namespace_general;
         $namespace_reservados =& $this->namespace_reservados;
 
-        spl_autoload_register(function($clase_nombre) use ($carpeta_principal, &$namespace_reservados) {
+        spl_autoload_register(function($clase_nombre) use (&$namespace_general, &$namespace_reservados) {
             $clase_namespace_strpos = strpos($clase_nombre, '\\');
             $clase_namespace = substr($clase_nombre, 0, $clase_namespace_strpos);
             $archivo_nombre = trim(str_replace('\\', DIRECTORY_SEPARATOR, substr($clase_nombre, $clase_namespace_strpos)), DIRECTORY_SEPARATOR);
 
             if( isset($namespace_reservados[$clase_namespace]) ) {
                 $archivo_ruta = $namespace_reservados[$clase_namespace]->ruta() . $archivo_nombre . '.php';
-            } else {
+            } else if( $namespace_general !== null ) {
                 $clase_namespace = empty($clase_namespace) ? '' : $clase_namespace . DIRECTORY_SEPARATOR;
-                $archivo_ruta = $carpeta_principal->ruta() . $clase_namespace . $archivo_nombre . '.php';
+                $archivo_ruta = $namespace_general->ruta() . $clase_namespace . $archivo_nombre . '.php';
+            } else {
+                return;
             }
 
             // TAREA: Validar si el archivo existe (?)
@@ -36,7 +43,11 @@ class Invocador
 
     public function reservarNamespace(string $namespace, Carpeta $carpeta)
     {
-        $this->namespace_reservados[$namespace] = $carpeta;
+        if( !empty($namespace) ) {
+            $this->namespace_reservados[$namespace] = $carpeta;
+        } else {
+            $this->namespace_general = $carpeta;
+        }
     }
 
 }
