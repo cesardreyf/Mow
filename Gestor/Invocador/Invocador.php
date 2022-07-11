@@ -29,9 +29,8 @@ class Invocador
             // TAREA: Validar si el archivo existe (?)
             require $archivo_ruta;
 
-            if( !class_exists($clase_nombre) || !interface_exists($clase_nombre, false) ) {
-                trigger_error("No se encontró '$clase_nombre' en '$archivo_ruta'", E_USER_ERROR);
-            }
+            if( class_exists($clase_nombre, false) || interface_exists($clase_nombre, false) ) return;
+            else trigger_error("No se encontró '$clase_nombre' en '$archivo_ruta'", E_USER_ERROR);
         });
     }
 
