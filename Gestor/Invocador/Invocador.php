@@ -50,6 +50,12 @@ class Invocador
         }
     }
 
+    public function invocar(string $clase, ...$argumentos): object
+    {
+        class_exists($clase, true);
+        return new $clase(...$argumentos);
+    }
+
 }
 
 ?>
