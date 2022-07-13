@@ -6,5 +6,3 @@ interface Guardable
 {
     public function guardar(array $error);
 }
-
-?>

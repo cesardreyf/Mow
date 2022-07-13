@@ -26,5 +26,3 @@ class MemoriaSoloLectura implements MSL
     }
 
 }
-
-?>

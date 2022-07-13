@@ -6,5 +6,3 @@ interface Ruta
 {
     public function ruta(): string;
 }
-
-?>

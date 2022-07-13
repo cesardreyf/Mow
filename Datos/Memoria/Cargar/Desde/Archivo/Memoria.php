@@ -13,5 +13,3 @@ class Memoria extends MemoriaSoloLectura implements IMemoria
     }
 
 }
-
-?>

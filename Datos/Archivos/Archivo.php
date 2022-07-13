@@ -23,5 +23,3 @@ class Archivo implements IArchivo
     }
 
 }
-
-?>

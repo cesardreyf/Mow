@@ -44,5 +44,3 @@ class GuardarTexto implements Guardable
     }
 
 }
-
-?>

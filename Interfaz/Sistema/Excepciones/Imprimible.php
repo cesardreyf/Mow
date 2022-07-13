@@ -8,5 +8,3 @@ interface Imprimible
 {
     public function imprimir(Throwable $e);
 }
-
-?>

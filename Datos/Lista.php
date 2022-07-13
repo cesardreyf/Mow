@@ -19,5 +19,3 @@ class Lista implements ILista
     }
 
 }
-
-?>

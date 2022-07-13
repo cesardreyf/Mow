@@ -6,5 +6,3 @@ interface Memoria extends MemoriaSoloLectura
 {
     public function definir(string $direccion, $valor);
 }
-
-?>

@@ -6,5 +6,3 @@ interface Lista
 {
     public function lista(): array;
 }
-
-?>

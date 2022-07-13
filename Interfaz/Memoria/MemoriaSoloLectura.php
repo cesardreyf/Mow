@@ -6,5 +6,3 @@ interface MemoriaSoloLectura
 {
     public function obtener(string $direccion);
 }
-
-?>

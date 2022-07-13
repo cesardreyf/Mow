@@ -23,5 +23,3 @@ class Carpeta implements ICarpeta
     }
 
 }
-
-?>

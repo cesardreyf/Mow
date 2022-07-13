@@ -14,5 +14,3 @@ class ImprimirTexto implements Imprimible
     }
 
 }
-
-?>

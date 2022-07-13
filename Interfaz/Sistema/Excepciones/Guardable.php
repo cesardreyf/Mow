@@ -8,5 +8,3 @@ interface Guardable
 {
     public function guardar(Throwable $e);
 }
-
-?>

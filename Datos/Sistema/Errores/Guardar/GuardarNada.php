@@ -12,5 +12,3 @@ class GuardarNada implements Guardable
     }
 
 }
-
-?>

@@ -12,5 +12,3 @@ class ImprimirNada implements Imprimible
     }
 
 }
-
-?>

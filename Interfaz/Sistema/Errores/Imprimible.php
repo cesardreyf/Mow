@@ -6,5 +6,3 @@ interface Imprimible
 {
     public function imprimir(array $error);
 }
-
-?>
