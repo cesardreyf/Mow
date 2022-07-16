@@ -24,13 +24,18 @@ class Invocador
             $clase_namespace = substr($clase_nombre, 0, $clase_namespace_strpos);
             $archivo_nombre = trim(str_replace('\\', DIRECTORY_SEPARATOR, substr($clase_nombre, $clase_namespace_strpos)), DIRECTORY_SEPARATOR);
 
-            if( isset($namespace_reservados[$clase_namespace]) ) {
-                $archivo_ruta = $namespace_reservados[$clase_namespace]->ruta() . $archivo_nombre . '.php';
-            } else if( $namespace_general !== null ) {
-                $clase_namespace = empty($clase_namespace) ? '' : $clase_namespace . DIRECTORY_SEPARATOR;
-                $archivo_ruta = $namespace_general->ruta() . $clase_namespace . $archivo_nombre . '.php';
-            } else {
-                return;
+            switch( true ) {
+                case isset($namespace_reservados[$clase_namespace]):
+                    $archivo_ruta = $namespace_reservados[$clase_namespace]->ruta() . $archivo_nombre . '.php';
+                    break;
+
+                case $namespace_general !== null:
+                    $clase_namespace = empty($clase_namespace) ? '' : $clase_namespace . DIRECTORY_SEPARATOR;
+                    $archivo_ruta = $namespace_general->ruta() . $clase_namespace . $archivo_nombre . '.php';
+                    break;
+
+                default:
+                    return;
             }
 
             // TAREA: Validar si el archivo existe (?)
